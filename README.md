@@ -1,5 +1,6 @@
 # Rock Paper Scissors Project
 
+https://jamespmarcus.github.io/rockpaperscissors/
 
 
 This is the first project to actually use the functions of javascript to create a simple, web-based rock, paper, scissors game. 
