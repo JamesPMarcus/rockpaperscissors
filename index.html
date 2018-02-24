@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Rock Paper Scissors</title>
+      <link href="styles.css" rel=stylesheet>
+      <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+      
+  </head>
+  <body>
+    <div class = 'container'>  
+      <div class= 'header'>
+          <h1> Rock, Paper, Scissors Dude!<i class = 'em em-surfer'></i></h1>
+          <h2>First to 5 points wins!</h2>
+      </div>
+      
+      <div class = 'button'>
+            <button id="rock" type="button" class="button">Rock</button>
+            <button id="paper" type="button" class="button">Paper</button>
+            <button id="scissors" type="button" class="button">Scissors</button>
+      </div>
+      
+      <div id='result' class ='resultBox'>
+        <h2>Scoreboard</h2>
+        <div class ='scrBrd'>
+          <span id='playerScore' class='score'>0</span> - <span id='compScore' class = 'score'>0</span>
+      </div>
+    </div>
+  </div>    
+    
+ 
+      
+<script>
+      
+      //delcarations
+      
+      const myArray = ['rock','paper','scissors']; 
+      const rock = document.querySelector('#rock');
+      const paper = document.querySelector('#paper');
+      const scissors = document.querySelector('#scissors');
+      const playerScore = document.querySelector('#playerScore');
+      const compScore = document.querySelector('#compScore');
+      const rslt = document.querySelector('#result');
+      const p = document.createElement('p');
+     
+    
+    let usrPts = 0;
+    let comPts = 0;
+      
+      
+    //users choice event listener
+      
+      rock.addEventListener('click', () => {
+          p.textContent = playRound('ROCK', computerPlay());
+          rslt.appendChild(p);
+          chkPts();
+      });
+    
+    paper.addEventListener('click', () => {
+          p.textContent = playRound('PAPER', computerPlay());
+          rslt.appendChild(p);
+          chkPts();
+      });
+    
+    scissors.addEventListener('click', () => {
+          p.textContent = playRound('SCISSORS', computerPlay());
+          rslt.appendChild(p);
+          chkPts();
+      });
+          
+    
+      
+      //computer random choice
+      function computerPlay() {
+        
+        let compChoice = myArray[Math.floor(Math.random() * myArray.length)];
+          
+          return compChoice.toUpperCase();
+      }
+    
+  //5 points total to end of game
+    
+    function chkPts() {
+        if(usrPts == 5) {
+            p.innerHTML = 'Bro! You just beat some artificial intelligence! Tubular!<br>Refresh to play again';
+            rslt.appendChild(p);
+            document.getElementById('compScore').style.border = 'thick'; 
+            rock.setAttribute('disabled', '');
+            paper.setAttribute('disabled', '');
+            scissors.setAttribute('disabled', '');
+        }
+         if(comPts == 5) {
+            p.innerHTML = 'Hooo! You got smoked by this computer, next time brah<br>Refresh to play again';
+            rslt.appendChild(p);
+            document.getElementById('playerScore').style.border = 'thick'; 
+            rock.setAttribute('disabled', '');
+            paper.setAttribute('disabled', '');
+            scissors.setAttribute('disabled', '');
+             
+      }
+    }
+
+      //A round in the game
+      
+      function playRound(playerSelection, computerSelection) {
+          
+        if (computerSelection == playerSelection) {
+            return 'It is a tie brah! ' + ' You both have chosen ' + playerSelection;
+        } else if (
+            (playerSelection == 'ROCK' && computerSelection =='SCISSORS') ||
+            (playerSelection == 'PAPER' && computerSelection == 'ROCK') ||
+            (playerSelection == 'SCISSORS' && computerSelection == 'PAPER') 
+            ) {
+            usrPts+=1;
+            playerScore.textContent = usrPts;
+            return "Fuck Yea Dude! Your " + playerSelection + " beat the computer's " + computerSelection;
+           
+        }   else {
+            comPts+= 1;
+            compScore.textContent = comPts;
+            return "Ah bogus man! You lost. Your " + playerSelection + " got killed by the comp's " + computerSelection;     
+            
+        }
+          
+      }
+	    
+
+  
+  </script>
+  
+  </body>
+</html>
